@@ -1,4 +1,4 @@
-# Web Development Final Project - *Name of App Here*
+# Web Development Final Project - *Food of the Day*
 
 Submitted by: **Food OF the Day**
 
