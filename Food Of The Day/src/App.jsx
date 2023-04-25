@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { v4 as uuidv4 } from 'uuid';
 
+const CDNURL = "https://wobgpcmhoekeetgiebxb.supabase.co/storage/v1/object/public/Images/"
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
   async function getImages() {
     const { data, error } = await supabase
       .storage
-      .from('images')
+      .from('Images')
       .list(user?.id + "/", {
         limit: 100,
         offset: 0,
@@ -67,7 +68,7 @@ function App() {
 
     const { data, error } = await supabase
       .storage
-      .from('images')
+      .from('Images')
       .upload(user.id + "/" + uuidv4(), file)  // Cooper/ASDFASDFASDF uuid, taylorSwift.png -> taylorSwift.png
 
     if(data) {
@@ -80,7 +81,7 @@ function App() {
   async function deleteImage(imageName) {
     const { error } = await supabase
       .storage
-      .from('images')
+      .from('Images')
       .remove([ user.id + "/" + imageName])
     
     if(error) {
@@ -89,14 +90,6 @@ function App() {
       getImages();
     }
   }
-
-//   <div>
-//   <h1>FOOD OF THE DAY</h1>
-//   <h3>Here is where you post your food of the day and share it among your friends</h3>
-//   <div>
-//     <img className='cat-pic' src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWQxMTRkNTcyYWVjMjM5YTIyYTcyYzBiMDAzMWFjZGU2MmY2ZTZlOSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/kTeNaCZW8wQrC/giphy.gif" class="welcome-images"/>
-//   </div>
-// </div>
 
   return (
 
@@ -107,7 +100,13 @@ function App() {
     */}
     { user === null ? 
       <>
-        <h1>Welcome to ImageWall</h1>
+        <div>
+          <h1>FOOD OF THE DAY</h1>
+          <h3>Here is where you post your food of the day and share it among your friends</h3>
+          <div>
+            <img className='cat-pic' src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWQxMTRkNTcyYWVjMjM5YTIyYTcyYzBiMDAzMWFjZGU2MmY2ZTZlOSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/kTeNaCZW8wQrC/giphy.gif" class="welcome-images"/>
+          </div>
+        </div>
         <Form>
           <Form.Group className="mb-3" style={{maxWidth: "500px"}}>
             <Form.Label>Enter an email to sign in with a Supabase Magic Link</Form.Label>
@@ -124,7 +123,7 @@ function App() {
       </>
     : 
       <>
-        <h1>Your ImageWall</h1>
+        <h1>My Food of The Day</h1>
         <Button onClick={() => signOut()}>Sign Out</Button>
         <p>Current user: {user.email}</p>
         <p>Use the Choose File button below to upload an image to your gallery</p>
