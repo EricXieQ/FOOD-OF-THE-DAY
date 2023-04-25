@@ -128,7 +128,7 @@ function App() {
         <p>Current user: {user.email}</p>
         <p>Use the Choose File button below to upload an image to your gallery</p>
         <Form.Group className="mb-3" style={{maxWidth: "500px"}}>
-          <Form.Control type="file" accept="image/png, image/jpeg" onChange={(e) => uploadImage(e)}/>
+          <Form.Control type="file" accept="image/png, image/jpeg, image/gif" onChange={(e) => uploadImage(e)}/>
         </Form.Group>
         <hr />
         <h3>Your Images</h3>
